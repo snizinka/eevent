@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from "../screens/ProfileScreen.tsx";
 
 const Tab = createBottomTabNavigator();
 
@@ -10,7 +11,7 @@ export default function TabNavigation() {
             <Tab.Screen name='Tickets' component={HomeScreen} options={{}} />
             <Tab.Screen name='Favorites' component={HomeScreen} options={{}} />
             <Tab.Screen name='Notifications' component={HomeScreen} options={{}} />
-            <Tab.Screen name='Profile' component={HomeScreen} options={{}} />
+            <Tab.Screen name='Profile' component={ProfileScreen} options={{}} />
         </Tab.Navigator>
     );
 }
