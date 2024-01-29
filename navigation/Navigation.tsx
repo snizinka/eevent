@@ -4,12 +4,6 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import TabNavigation from './TabNavigation';
 import StackNavigation from './StackNavigation';
 
-export type RootStackParamList = {
-  SignInScreen: undefined;
-  SignUpWithEmail: { email: string };
-  TabNavigation: undefined;
-};
-
 export default function Navigation() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)

@@ -6,7 +6,6 @@ import AboutScreen from '../screens/SignUpWithEmailScreen';
 export type RootStackParamList = {
   SignInScreen: undefined;
   SignUpWithEmail: { email: string };
-  TabNavigation: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
