@@ -4,8 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AboutScreen from '../screens/SignUpWithEmailScreen';
 import { useEffect, useState } from 'react';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabNavigation from './TabNavigation';
+import { View } from 'react-native';
+import { Text } from 'react-native-elements';
+import SplashScreen from 'react-native-splash-screen';
 
 export type RootStackParamList = {
   SignInScreen: undefined;
@@ -14,26 +16,36 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
-const Tab = createBottomTabNavigator();
 
 export default function StackNavigation() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function isUserAuthenticated() {
       let response = await GoogleSignin.isSignedIn()
       setIsAuthenticated(response)
+      setLoading(prev => !prev)
     }
     isUserAuthenticated()
   }, [])
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='SignInScreen' screenOptions={{ title: '' }}>
-        <Stack.Screen name='SignInScreen' component={SignInScreen} />
-        <Stack.Screen name='SignUpWithEmail' component={AboutScreen} />
-        <Stack.Screen name='TabNavigation' component={TabNavigation} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  if (!loading && isAuthenticated) {
+    return (
+      <NavigationContainer>
+        <TabNavigation />
+      </NavigationContainer>
+    );
+  }
+  
+  if (!loading && !isAuthenticated) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='SignInScreen' screenOptions={{ title: '' }}>
+          <Stack.Screen name='SignInScreen' component={SignInScreen} />
+          <Stack.Screen name='SignUpWithEmail' component={AboutScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
