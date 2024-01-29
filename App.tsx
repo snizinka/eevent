@@ -1,9 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
-import StackNavigation from './navigation/StackNavigation';
+import { useEffect, useState } from 'react';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import SplashScreen from 'react-native-splash-screen';
-import { View } from 'react-native';
-import { Text } from 'react-native-elements';
+import Navigation from './navigation/Navigation';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -25,5 +23,5 @@ export default function App() {
     SplashScreen.hide();
   }
 
-  return <StackNavigation />
+  return <Navigation />
 }
