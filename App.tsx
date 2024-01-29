@@ -1,22 +1,18 @@
-import { useCallback, useEffect, useState } from 'react';
-import StackNavigation from './navigation/StackNavigation';
+import { useEffect, useState } from 'react';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import SplashScreen from 'react-native-splash-screen';
-import { View } from 'react-native';
-import { Text } from 'react-native-elements';
+import Navigation from './navigation/Navigation';
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [loading, setLoading] = useState<boolean>()
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    console.log('Called')
     setLoading(true)
     async function isUserAuthenticated() {
       let response = await GoogleSignin.isSignedIn()
       setIsAuthenticated(response)
       setLoading(!response)
-      console.log(!response)
     }
     isUserAuthenticated()
   }, [])
@@ -25,5 +21,5 @@ export default function App() {
     SplashScreen.hide();
   }
 
-  return <StackNavigation />
+  return <Navigation isAuthenticated={isAuthenticated} loading={loading} />
 }
