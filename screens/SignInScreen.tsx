@@ -22,21 +22,14 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../navigation/StackNavigation';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SignInScreen'>
-interface IExtendedConfigureParams extends ConfigureParams {
-  androidClientId?: string;
-}
 
 function SignInScreen({ navigation }: Props): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const [state, setState] = useState<User>()
   const [email, setEmail] = useState<string>('')
-  const configParams: IExtendedConfigureParams = {
-    androidClientId: '685781511219-rm7t2g7j6mka9a1cdt3bd2oivo5njqm1.apps.googleusercontent.com',
-  };
   
   const _signIn = async () => {
     try {
-      GoogleSignin.configure(configParams);
       await GoogleSignin.hasPlayServices();
       const userInfo: User = await GoogleSignin.signIn();
       setState(userInfo)

@@ -11,12 +11,10 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export default function StackNavigation() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName='SignInScreen' screenOptions={{ title: '' }}>
-          <Stack.Screen name='SignInScreen' component={SignInScreen} />
-          <Stack.Screen name='SignUpWithEmail' component={AboutScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
+  return (
+    <Stack.Navigator initialRouteName='SignInScreen' screenOptions={{ title: '' }}>
+      <Stack.Screen name='SignInScreen' component={SignInScreen} />
+      <Stack.Screen name='SignUpWithEmail' component={AboutScreen} />
+    </Stack.Navigator>
+  );
 }
