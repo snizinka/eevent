@@ -1,22 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import TabNavigation from './TabNavigation';
 import StackNavigation from './StackNavigation';
 
-export default function Navigation() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    async function isUserAuthenticated() {
-      let response = await GoogleSignin.isSignedIn()
-      setIsAuthenticated(response)
-      setLoading(prev => !prev)
-    }
-    isUserAuthenticated()
-  }, [])
-
+export default function Navigation({isAuthenticated, loading} : {isAuthenticated: boolean, loading: boolean}) {
   if (!loading && isAuthenticated) {
     return (
       <NavigationContainer>
