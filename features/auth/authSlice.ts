@@ -6,6 +6,16 @@ export interface IAuthState {
     userInfo: User | null;
 }
 
+export interface ISetIsAuthenticatedAction {
+    type: string,
+    payload: boolean
+}
+
+export interface ISetUserInfoAction {
+    type: string,
+    payload: User | null
+}
+
 const initialState: IAuthState = {
     isAuthenticated: false,
     userInfo: null
@@ -15,10 +25,10 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setIsAuthenticated: (state, action) => {
+        setIsAuthenticated: (state: IAuthState, action: ISetIsAuthenticatedAction) => {
             state.isAuthenticated =  action.payload
         },
-        setUserInfo: (state, action) => {
+        setUserInfo: (state: IAuthState, action: ISetUserInfoAction) => {
             state.userInfo = action.payload
         }
     }

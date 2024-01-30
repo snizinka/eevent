@@ -7,11 +7,11 @@ import { useEffect, useState } from 'react';
 import { IAuthState, setIsAuthenticated } from '../features/auth/authSlice';
 import SplashScreen from 'react-native-splash-screen';
 import configureGoogleServices from '../services/configureGoogleServicesService';
-import { Dispatch } from '@reduxjs/toolkit';
+import { AppDispatch, RootState, rootReducer } from '../store';
 
 export default function Navigation() {
-  const dispatch: Dispatch = useDispatch()
-  const isAuthenticated = useSelector<IAuthState>(state => state.isAuthenticated)
+  const dispatch: AppDispatch = useDispatch()
+  const isAuthenticated: boolean = useSelector<RootState, boolean>((state: RootState) => state.auth.isAuthenticated)
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {

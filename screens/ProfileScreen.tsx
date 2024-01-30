@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../navigation/StackNavigation.tsx";
 import { useDispatch } from 'react-redux';
 import { setIsAuthenticated, setUserInfo } from '../features/auth/authSlice.ts';
+import { RootTabParamList } from '../navigation/TabNavigation.tsx';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'SignInScreen'>
+type Props = NativeStackScreenProps<RootTabParamList, 'Profile'>
 
 export default function ProfileScreen({ navigation }: Props) {
   const dispatch = useDispatch()
