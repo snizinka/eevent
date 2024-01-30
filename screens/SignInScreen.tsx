@@ -1,18 +1,12 @@
 import React from 'react';
-import { SignInButton, IStyle } from '../components/SignInButton'
+import { SignInButton } from '../components/SignInButton'
 import {
   Text,
   useColorScheme,
   View,
-  ViewStyle,
-  StyleSheet,
 } from 'react-native';
 import { TextInput } from '../components/TextInput'
 import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-import {
-  ConfigureParams,
   GoogleSignin, User,
 } from '@react-native-google-signin/google-signin';
 import { useState } from 'react';
@@ -20,26 +14,26 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../navigation/StackNavigation';
+import { useDispatch } from 'react-redux';
+import { setIsAuthenticated, setUserInfo } from '../features/auth/authSlice';
+import { AppDispatch } from '../store';
+import { continueWithEmailStyles, googleSingInStyles, logoStyles, mainContainerStyles, singInStyles, usernameOrEmailInputStyles } from '../styles/SignInScreenStyles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SignInScreen'>
-interface IExtendedConfigureParams extends ConfigureParams {
-  androidClientId?: string;
-}
 
 function SignInScreen({ navigation }: Props): React.JSX.Element {
+  const dispatch: AppDispatch = useDispatch()
   const isDarkMode = useColorScheme() === 'dark';
   const [state, setState] = useState<User>()
   const [email, setEmail] = useState<string>('')
-  const configParams: IExtendedConfigureParams = {
-    androidClientId: '685781511219-rm7t2g7j6mka9a1cdt3bd2oivo5njqm1.apps.googleusercontent.com',
-  };
   
   const _signIn = async () => {
     try {
-      GoogleSignin.configure(configParams);
       await GoogleSignin.hasPlayServices();
       const userInfo: User = await GoogleSignin.signIn();
       setState(userInfo)
+      dispatch(setIsAuthenticated(true))
+      dispatch(setUserInfo(userInfo))
       console.log(userInfo)
     } catch (error) {
       console.log(error)
@@ -94,65 +88,6 @@ function SignInScreen({ navigation }: Props): React.JSX.Element {
       )}
     </Formik>
   )
-}
-
-const mainContainerStyles = (isDarkMode: boolean): ViewStyle => {
-  return {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    backgroundColor: isDarkMode ? Colors.black : Colors.white,
-  }
-}
-
-const logoStyles = StyleSheet.create({
-  wrapper: {
-    marginTop: 100
-  },
-  header: {
-    textAlign: 'center',
-    fontSize: 50,
-    fontWeight: '700',
-    color: 'black'
-  },
-  error: {
-    color: 'red'
-  }
-})
-
-const singInStyles = StyleSheet.create({
-  wrapper: { display: 'flex', flexDirection: 'column', rowGap: 10, marginBottom: 10 }
-})
-
-const googleSingInStyles: IStyle = {
-  containerStyles: {
-    borderColor: 'transparent',
-    backgroundColor: '#5583EC',
-  },
-  contentStyles: {
-    color: 'white',
-    fontSize: 16
-  }
-}
-
-const usernameOrEmailInputStyles: ViewStyle = {
-  borderWidth: 1,
-  borderColor: '#E4EBE4',
-  borderStyle: 'solid',
-  borderRadius: 10,
-  height: 40
-}
-
-const continueWithEmailStyles: IStyle = {
-  containerStyles: {
-    borderColor: 'transparent',
-    backgroundColor: '#4EA52F',
-  },
-  contentStyles: {
-    color: 'white',
-    fontSize: 15
-  }
 }
 
 export default SignInScreen;
