@@ -12,7 +12,6 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import {
-  ConfigureParams,
   GoogleSignin, User,
 } from '@react-native-google-signin/google-signin';
 import { useState } from 'react';
@@ -20,10 +19,14 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../navigation/StackNavigation';
+import { useDispatch } from 'react-redux';
+import { setIsAuthenticated, setUserInfo } from '../features/auth/authSlice';
+import { Dispatch } from '@reduxjs/toolkit';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SignInScreen'>
 
 function SignInScreen({ navigation }: Props): React.JSX.Element {
+  const dispatch: Dispatch = useDispatch()
   const isDarkMode = useColorScheme() === 'dark';
   const [state, setState] = useState<User>()
   const [email, setEmail] = useState<string>('')
@@ -33,6 +36,8 @@ function SignInScreen({ navigation }: Props): React.JSX.Element {
       await GoogleSignin.hasPlayServices();
       const userInfo: User = await GoogleSignin.signIn();
       setState(userInfo)
+      dispatch(setIsAuthenticated(true))
+      dispatch(setUserInfo(userInfo))
       console.log(userInfo)
     } catch (error) {
       console.log(error)
