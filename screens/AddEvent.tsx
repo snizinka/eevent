@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
 import { addEvent } from '../features/events/eventsSlice';
 import { Button } from '../components/Button';
-import styled from 'styled-components';
 
 type Props = NativeStackScreenProps<RootTabParamList, 'Tickets'>
 
@@ -78,9 +77,5 @@ function AddEventScreen({ navigation }: Props): React.JSX.Element {
         </Formik>
     )
 }
-
-const Button = styled.button({
-    color: 'grey',
-});
 
 export default AddEventScreen;

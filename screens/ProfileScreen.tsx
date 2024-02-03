@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text} from 'react-native';
+import { Button } from '../components/Button';
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useDispatch } from 'react-redux';
@@ -8,7 +9,7 @@ import { RootTabParamList } from '../navigation/TabNavigation.tsx';
 
 type Props = NativeStackScreenProps<RootTabParamList, 'Profile'>
 
-export default function ProfileScreen({ navigation }: Props) {
+export default function ProfileScreen(){
   const dispatch = useDispatch()
 
   const signOut = async () => {
@@ -22,9 +23,9 @@ export default function ProfileScreen({ navigation }: Props) {
   return (
     <View>
       <Text>Profile Screen</Text>
-      <Button title={'Logout'} onPress={async () => {
+      <Button onPress={async () => {
         await signOut();
-      }} />
+      }} >Logout</Button>
     </View>
   );
 }
