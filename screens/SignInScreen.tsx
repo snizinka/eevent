@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignInButton } from '../components/SignInButton'
+import { Button } from '../components/Button'
 import {
   Text,
   useColorScheme,
@@ -26,7 +26,7 @@ function SignInScreen({ navigation }: Props): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const [state, setState] = useState<User>()
   const [email, setEmail] = useState<string>('')
-  
+
   const _signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
@@ -65,8 +65,8 @@ function SignInScreen({ navigation }: Props): React.JSX.Element {
           <View style={{ paddingBottom: '10%', paddingTop: '10%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <View>
               <View style={singInStyles.wrapper}>
-                <SignInButton onPress={async () => await _signIn()}>Continue with Apple</SignInButton>
-                <SignInButton style={googleSingInStyles} onPress={async () => await _signIn()}>Continue with Google</SignInButton>
+                <Button onPress={async () => await _signIn()}>Continue with Apple</Button>
+                <Button style={googleSingInStyles} onPress={async () => await _signIn()}>Continue with Google</Button>
               </View>
               <View><Text style={{ textAlign: 'center', fontSize: 15 }}>Or</Text></View>
               <View style={{ display: 'flex', flexDirection: 'column', rowGap: 10, marginTop: 10 }}>
@@ -80,7 +80,7 @@ function SignInScreen({ navigation }: Props): React.JSX.Element {
                   />
                   <Text style={logoStyles.error}>{(errors.email) ?? ''}</Text>
                 </View>
-                <SignInButton style={continueWithEmailStyles} onPress={handleSubmit}>Continue with Email</SignInButton>
+                <Button style={continueWithEmailStyles} onPress={handleSubmit}>Continue with Email</Button>
               </View>
             </View>
           </View>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { SignInButton } from '../components/SignInButton'
 import {
   Text,
   useColorScheme,
@@ -10,10 +9,11 @@ import { CheckBox } from '@rneui/themed';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../navigation/StackNavigation';
 import { continueWithEmailStyles, logoStyles, mainContainerStyles, usernameOrEmailInputStyles } from '../styles/SignUpWithEmail';
+import {Button} from "../components/Button.tsx";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SignUpWithEmail'>
 
-function SignUpWithEmailScreen({ route, navigation }: Props): React.JSX.Element {
+function SignUpWithEmailScreen({ route }: Props): React.JSX.Element {
   const { email } = route.params
   const [aggreeWithPolicy, setAggreeWithPolicy] = useState<boolean>(false)
   const [firstName, setFirstName] = useState<string>('')
@@ -76,7 +76,7 @@ function SignUpWithEmailScreen({ route, navigation }: Props): React.JSX.Element 
       </View>
       <View style={{ paddingBottom: '10%', paddingTop: '10%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ display: 'flex', flexDirection: 'column', rowGap: 10, marginTop: 10 }}>
-          <SignInButton disabled={!aggreeWithPolicy} style={continueWithEmailStyles} onPress={() => {}}>Create my account</SignInButton>
+          <Button disabled={!aggreeWithPolicy} style={continueWithEmailStyles} onPress={() => {}}>Create my account</Button>
         </View>
       </View>
     </View>
