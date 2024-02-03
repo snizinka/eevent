@@ -21,9 +21,9 @@ function HomeScreen(): React.JSX.Element {
     <View>
       <View style={{display: 'flex', rowGap: 10, width: '90%', marginLeft: 'auto', marginRight: 'auto'}}>
         {events?.map((event: IEventState, key: number) => {
-          return <View key={key} style={{display: 'flex'}}>
+          return <View key={key} style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
             <Text style={{fontSize: 18}}>{event.name}</Text>
-            <Button onPress={() => deleteEvent(event.id)}>Remove</Button>
+            <Button style={{containerStyles: {alignSelf: 'center', paddingHorizontal: 8, paddingVertical: 5}}} onPress={() => deleteEvent(event.id)}>Remove</Button>
           </View>
         })}
       </View>

@@ -8,10 +8,11 @@ import * as yup from 'yup';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootTabParamList } from '../navigation/TabNavigation';
 import { TextInput } from '../components/TextInput';
-import { Button } from '@rneui/themed';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
 import { addEvent } from '../features/events/eventsSlice';
+import { Button } from '../components/Button';
+import styled from 'styled-components';
 
 type Props = NativeStackScreenProps<RootTabParamList, 'Tickets'>
 
@@ -39,10 +40,7 @@ function AddEventScreen({ navigation }: Props): React.JSX.Element {
             }}
         >
             {({ handleChange, handleSubmit, values, errors, touched }) => (
-                <View>
-                    <View>
-                        <Text>Add An Event</Text>
-                    </View>
+                <View style={{width: '90%', marginLeft: 'auto', marginRight: 'auto'}}>
                     <View style={{ display: 'flex', flexDirection: 'column', rowGap: 10, marginTop: 10 }}>
                         <View>
                             <TextInput
@@ -73,12 +71,16 @@ function AddEventScreen({ navigation }: Props): React.JSX.Element {
                             />
                             <Text>{(errors.image) ?? ''}</Text>
                         </View>
-                        <Button onPress={handleSubmit}>Add an Event</Button>
+                        <Button style={{containerStyles: {alignSelf: 'center', paddingHorizontal: 10}}} onPress={handleSubmit}>Add an Event</Button>
                     </View>
                 </View>
             )}
         </Formik>
     )
 }
+
+const Button = styled.button({
+    color: 'grey',
+});
 
 export default AddEventScreen;
