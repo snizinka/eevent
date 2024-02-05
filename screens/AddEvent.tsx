@@ -44,31 +44,37 @@ function AddEventScreen({ navigation }: Props): React.JSX.Element {
                         <View>
                             <TextInput
                                 name="name"
-                                onChangeText={handleChange('name')}
+                                onChangeText={() => handleChange('name')}
                                 value={values.name}
                                 placeholder="Event name"
                             />
-                            <Text>{(errors.name) ?? ''}</Text>
+                          {errors.name && touched.name && (
+                            <Text>{String(errors.name)}</Text>
+                          )}
                         </View>
 
                         <View>
                             <TextInput
                                 name="date"
-                                onChangeText={handleChange('date')}
+                                onChangeText={() => handleChange('date')}
                                 value={values.date}
                                 placeholder="Event date"
                             />
-                            <Text>{(errors.date) ?? ''}</Text>
+                          {errors.date && touched.date && (
+                            <Text>{String(errors.date)}</Text>
+                          )}
                         </View>
 
                         <View>
                             <TextInput
                                 name="image"
-                                onChangeText={handleChange('image')}
+                                onChangeText={() => handleChange('image')}
                                 value={values.image}
                                 placeholder="Event image"
                             />
-                            <Text>{(errors.image) ?? ''}</Text>
+                          {errors.image && touched.image && (
+                            <Text>{String(errors.image)}</Text>
+                          )}
                         </View>
                         <Button style={{containerStyles: {alignSelf: 'center', paddingHorizontal: 10}}} onPress={handleSubmit}>Add an Event</Button>
                     </View>
