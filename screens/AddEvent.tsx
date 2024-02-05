@@ -44,7 +44,7 @@ function AddEventScreen({ navigation }: Props): React.JSX.Element {
                         <View>
                             <TextInput
                                 name="name"
-                                onChangeText={() => handleChange('name')}
+                                onChangeText={handleChange('name')}
                                 value={values.name}
                                 placeholder="Event name"
                             />
@@ -56,7 +56,7 @@ function AddEventScreen({ navigation }: Props): React.JSX.Element {
                         <View>
                             <TextInput
                                 name="date"
-                                onChangeText={() => handleChange('date')}
+                                onChangeText={handleChange('date')}
                                 value={values.date}
                                 placeholder="Event date"
                             />
@@ -68,7 +68,7 @@ function AddEventScreen({ navigation }: Props): React.JSX.Element {
                         <View>
                             <TextInput
                                 name="image"
-                                onChangeText={() => handleChange('image')}
+                                onChangeText={handleChange('image')}
                                 value={values.image}
                                 placeholder="Event image"
                             />
